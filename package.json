@@ -2,9 +2,10 @@
   "name": "ecommerce_api",
   "version": "1.0.0",
   "description": "A ecommerce_ api_backend",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [
     "js",
@@ -13,5 +14,9 @@
     "expressjs"
   ],
   "author": "Dhruv Rastogi",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.5"
+  }
 }
