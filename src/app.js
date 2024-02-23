@@ -16,4 +16,14 @@ app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" })); //accpects data from url
 app.use(express.static("public")); //static is used to store the files,folders,pdfs,images on our server , in this it is stored in public folder
 app.use(cookieParser());
+
+// routes import
+import userRouter from "./routes/user.routes.js";
+
+
+
+
+//routes declaration 
+app.use("/api/v1/users", userRouter);
+
 export { app };
