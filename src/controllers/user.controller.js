@@ -28,10 +28,20 @@ const generateAccessTokenAndRefreshToken = async (userId) => {
 // generate token end
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const {
+    fullName,
+    email,
+    password,
+    phone,
+    street,
+    apartment,
+    pincode,
+    city,
+    country,
+  } = req.body;
 
   if (
-    [fullName, email, password].some((field) => field?.trim() === "") //field he aur trim kane ke baad bhi empty he the true
+    [fullName, email, password,phone,street,apartment,pincode,city,country].some((field) => field?.trim() === "") //field he aur trim kane ke baad bhi empty he the true
   ) {
     throw new ApiError(400, "All fields are required");
   }
@@ -48,6 +58,12 @@ const registerUser = asyncHandler(async (req, res) => {
     fullName: fullName.toLowerCase(),
     email,
     password,
+    phone,
+    street,
+    apartment,
+    pincode,
+    city,
+    country
   });
 
   // check if user created or not
