@@ -38,6 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
     pincode,
     city,
     country,
+    isAdmin
   } = req.body;
 
   if (
@@ -63,7 +64,8 @@ const registerUser = asyncHandler(async (req, res) => {
     apartment,
     pincode,
     city,
-    country
+    country,
+    isAdmin
   });
 
   // check if user created or not
