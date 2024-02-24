@@ -21,6 +21,7 @@ app.use(cookieParser());
 import userRouter from "./routes/user.routes.js";
 import reviewRouter from './routes/review.routes.js'
 import categoryRouter from './routes/category.routes.js'
+import productRouter from './routes/product.routes.js'
 
 
 
@@ -29,5 +30,6 @@ import categoryRouter from './routes/category.routes.js'
 app.use("/api/v1/users", userRouter);
 app.use('/api/v1/review',reviewRouter)
 app.use('/api/v1/category',categoryRouter)
+app.use('/api/v1/products',productRouter)
 
 export { app };
