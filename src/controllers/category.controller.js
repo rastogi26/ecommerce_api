@@ -18,7 +18,7 @@ const createCategory = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Category with this name already exists");
   }
 
-  const iconLocalPath = req.files?.icon[0]?.path; // extract the path from local files in public
+  const iconLocalPath = req.file?.path; // extract the path from local files in public
 
   if (!iconLocalPath) {
     throw new ApiError(400, "Icon is required");
