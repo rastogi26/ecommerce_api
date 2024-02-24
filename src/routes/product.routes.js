@@ -18,6 +18,6 @@ router.route("/register-product").post(
 );
 
 router.route("/:categoryId").get(verifyJWT, getProductList);
-router.route("/:productId").get(verifyJWT,getProductDetails)
+router.route("/p/:productId").get(verifyJWT,getProductDetails)
 
 export default router;
