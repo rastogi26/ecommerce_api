@@ -15,8 +15,8 @@ const productSchema = new Schema(
       default: "",
     },
     image: {
-      type: String,
-      default: "",
+      type: String, //cloudinary url
+      required: true,
     },
     brand: {
       type: String,
@@ -49,9 +49,33 @@ const productSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
   { timestamps: true }
 );
+
+
+// Update product rating and numReviews when a new review is added
+productSchema.methods.updateRating = async function () {
+  const Review = mongoose.model("Review");
+  const reviews = await Review.find({ product: this._id });
+  const totalReviews = reviews.length;
+  if (totalReviews === 0) {
+    this.rating = 0;
+    this.numReviews = 0;
+  } else {
+    const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
+    this.rating = totalRating / totalReviews;
+    this.numReviews = totalReviews;
+  }
+  await this.save();
+};
+
 
 
 export const Product = mongoose.model("Product", productSchema);
