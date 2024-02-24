@@ -5,6 +5,8 @@ const productSchema = new Schema(
     name: {
       type: String,
       required: true,
+      unique: true,
+      lowercase: true,
     },
     description: {
       type: String,
@@ -27,10 +29,11 @@ const productSchema = new Schema(
       default: 0,
     },
     category: {
-      type: Schema.Types.ObjectId,
-      ref: "Category",
+      type: Schema.Types.ObjectId, // Reference to the Category model
+      ref: "Category", // Refers to the Category model
       required: true,
     },
+
     countInStock: {
       type: Number,
       required: true,
