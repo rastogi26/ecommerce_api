@@ -8,6 +8,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      lowercase: true,
     },
     email: {
       type: String,
@@ -29,23 +30,23 @@ const userSchema = new Schema(
     },
     street: {
       type: String,
-      default: "",
+      // default: "",
     },
     apartment: {
       type: String,
-      default: "",
+      // default: "",
     },
     pincode: {
       type: String,
-      default: "",
+      //default: "",
     },
     city: {
       type: String,
-      default: "",
+      //default: "",
     },
     country: {
       type: String,
-      default: "",
+      // default: "",
     },
     orderHistory: [
       {
@@ -58,7 +59,7 @@ const userSchema = new Schema(
         product: {
           type: Schema.Types.ObjectId,
           ref: "Product",
-          required: true,
+          // required: true,
         },
         quantity: {
           type: Number,
@@ -84,12 +85,11 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-
 //it is used to check the user password is correct or not
-userSchema.methods.isPasswordCorrect = async function(password){
-                      // compare takes two argument , 1. password in string and 2. encrypted password
-      return await bycrypt.compare(password,this.password)
-}
+userSchema.methods.isPasswordCorrect = async function (password) {
+  // compare takes two argument , 1. password in string and 2. encrypted password
+  return await bycrypt.compare(password, this.password);
+};
 
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
@@ -98,6 +98,14 @@ userSchema.methods.generateAccessToken = function () {
       _id: this._id, //coming from database
       email: this.email, //coming from database
       fullName: this.fullName, //coming from database
+      //phone: this.phone,
+      //street: this.street,
+      //apartment:this.apartment,
+      //pincode:this.pincode,
+      //city:this.city,
+      //country:this.country,
+      //isAdmin:this.isAdmin
+
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
@@ -118,6 +126,5 @@ userSchema.methods.generateRefreshToken = function () {
     }
   );
 };
-
 
 export const User = mongoose.model("User", userSchema);
