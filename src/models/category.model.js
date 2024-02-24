@@ -11,8 +11,7 @@ const categorySchema = new Schema(
       index: true, //kisi bhi field vo searchable bana he to index ko true kar do
     },
     icon: {
-      type: String,  //cloudinary url 
-      required: true,
+      type: String, //cloudinary url
     },
     color: {
       type: String,
