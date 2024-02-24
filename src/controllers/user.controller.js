@@ -38,11 +38,24 @@ const registerUser = asyncHandler(async (req, res) => {
     pincode,
     city,
     country,
-    isAdmin
+    isAdmin,
   } = req.body;
+  console.log(req.body);
 
+  console.log(fullName);
+  console.log(email);
   if (
-    [fullName, email, password,phone,street,apartment,pincode,city,country].some((field) => field?.trim() === "") //field he aur trim kane ke baad bhi empty he the true
+    [
+      fullName,
+      email,
+      password,
+      phone,
+      street,
+      apartment,
+      pincode,
+      city,
+      country,
+    ].some((field) => field?.trim() === "") //field he aur trim kane ke baad bhi empty he the true
   ) {
     throw new ApiError(400, "All fields are required");
   }
@@ -65,7 +78,7 @@ const registerUser = asyncHandler(async (req, res) => {
     pincode,
     city,
     country,
-    isAdmin
+    isAdmin,
   });
 
   // check if user created or not
@@ -241,5 +254,5 @@ export {
   logoutUser,
   refreshAccessToken,
   changeCurrentPassword,
-  getCurrentUser
+  getCurrentUser,
 };
