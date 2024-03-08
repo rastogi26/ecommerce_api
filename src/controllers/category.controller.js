@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose";
 import { Category } from "../models/category.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
@@ -66,4 +67,21 @@ const getAllCategories = asyncHandler(async (req, res) => {
     );
 });
 
-export { createCategory, getAllCategories };
+
+const deleteCategory = asyncHandler(async(req,res)=>{
+    const {categoryId} = req.params;
+    
+  if (!isValidObjectId(categoryId)) {
+     throw new ApiError(400,"Invalid category Id");
+  }
+
+  await Category.findByIdAndDelete({categoryId})
+   
+  return res
+  .status(200)
+  .json(new ApiResponse(200,"Successfully deleted the category"))
+
+})
+
+
+export { createCategory, getAllCategories, deleteCategory };
